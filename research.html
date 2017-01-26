@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Research</title>
+</head>
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">Shashank V</div>
+<div class="menu-item"><a href="home.html">Home</a></div>
+<div class="menu-item"><a href="resume.html">Resume</a></div>
+<div class="menu-item"><a href="research.html" class="current">Research</a></div>
+<div class="menu-item"><a href="publications.html">Publications</a></div>
+<div class="menu-item"><a href="links.html">Links</a></div>
+<div class="menu-item"><a href="IT.html">Information&nbsp;Theory</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Research</h1>
+</div>
+<p>The main theme of my PhD research has been designing efficient lattice coding schemes for secure and reliable communication, and secret key generation. During my short visit to INC, I worked on a problem of estimating the pattern maximum likelihood distribution of discrete-time Markov Chains.</p>
+<h2>Lattice Codes for Secure Compute-and-Forward in a Bidirectional Relay.</h2>
+<p>The bidirectional relay is a three-node network where two nodes <img class="eq" src="eqs/2581867003650528073-130.png" alt="mathtt{A}" style="vertical-align: -0px" /> and <img class="eq" src="eqs/2581867003649527948-130.png" alt="mathtt{B}" style="vertical-align: -0px" /> want to exchange messages via a relay <img class="eq" src="eqs/2581867003665528156-130.png" alt="mathtt{R}" style="vertical-align: -1px" />. All links between user nodes and relay are assumed to be wireless AWGN links. If <img class="eq" src="eqs/2581867003650528073-130.png" alt="mathtt{A}" style="vertical-align: -0px" /> has message <img class="eq" src="eqs/11264033881-130.png" alt="X" style="vertical-align: -0px" /> and <img class="eq" src="eqs/2581867003649527948-130.png" alt="mathtt{B}" style="vertical-align: -0px" /> has message <img class="eq" src="eqs/11392034264-130.png" alt="Y" style="vertical-align: -0px" />, then a simple two-stage protocol for exchanging <img class="eq" src="eqs/11264033881-130.png" alt="X" style="vertical-align: -0px" /> and <img class="eq" src="eqs/11392034264-130.png" alt="Y" style="vertical-align: -0px" /> is the following:</p>
+<ul>
+<li><p><img class="eq" src="eqs/2581867003650528073-130.png" alt="mathtt{A}" style="vertical-align: -0px" /> encodes <img class="eq" src="eqs/11264033881-130.png" alt="X" style="vertical-align: -0px" /> to <img class="eq" src="eqs/10880032724-130.png" alt="U" style="vertical-align: -1px" /> and <img class="eq" src="eqs/2581867003649527948-130.png" alt="mathtt{B}" style="vertical-align: -0px" /> encodes <img class="eq" src="eqs/11392034264-130.png" alt="Y" style="vertical-align: -0px" /> to <img class="eq" src="eqs/11008033111-130.png" alt="V" style="vertical-align: -1px" />, and they simultaneously broadcast the codewords. The relay obtains
+<div class="eqwl"><img class="eqwl" src="eqs/8422440793963003411-130.png" alt=" W=U+V+Z, " />
+<br /></div> where <img class="eq" src="eqs/11520034651-130.png" alt="Z" style="vertical-align: -0px" /> is the additive noise.</p>
+</li>
+<li><p><img class="eq" src="eqs/2581867003665528156-130.png" alt="mathtt{R}" style="vertical-align: -1px" /> estimates <img class="eq" src="eqs/7668878543051196482-130.png" alt="Xoplus  Y" style="vertical-align: -2px" /> (we embed the messages in a suitable Abelian group with addition operation <img class="eq" src="eqs/422321097324224970-130.png" alt="oplus " style="vertical-align: -2px" />), encodes this, and broadcasts to the user nodes.</p>
+</li>
+</ul>
+<p>Assuming that all goes well, <img class="eq" src="eqs/2581867003650528073-130.png" alt="mathtt{A}" style="vertical-align: -0px" /> and <img class="eq" src="eqs/2581867003649527948-130.png" alt="mathtt{B}" style="vertical-align: -0px" /> will be able to recover <img class="eq" src="eqs/11392034264-130.png" alt="Y" style="vertical-align: -0px" /> and <img class="eq" src="eqs/11264033881-130.png" alt="X" style="vertical-align: -0px" /> respectively. For such a setup, Wilson et al.[1] and Nazer and Gastpar[2] gave a nested lattice coding scheme which ensures that the desired messages can be recovered reliably. If we assume that all links have unit channel gains, both nodes have transmit power constraints of <img class="eq" src="eqs/10240030801-130.png" alt="P" style="vertical-align: -0px" />,  and the noise variance is <img class="eq" src="eqs/1833092850354643519-130.png" alt="sigma^2" style="vertical-align: -1px" />, then a rate of <img class="eq" src="eqs/5830780219916873740-130.png" alt="frac{1}{2}log_2 ( frac{1}{2}+frac{P}{sigma^2} )" style="vertical-align: -8px" /> can be achieved.</p>
+<p>We look at a problem of securely computing <img class="eq" src="eqs/3165385478250242328-130.png" alt="X oplus Y" style="vertical-align: -2px" />.
+If we impose the additional constraint that the relay must only be able to recover <img class="eq" src="eqs/7668878543051196482-130.png" alt="Xoplus  Y" style="vertical-align: -2px" /> and not <img class="eq" src="eqs/11264033881-130.png" alt="X" style="vertical-align: -0px" /> or <img class="eq" src="eqs/11392034264-130.png" alt="Y" style="vertical-align: -0px" /> individually, what can we say about this problem?  More specifically, assuming that the messages are uniformly chosen at random, we want</p>
+<ul>
+<li><p><img class="eq" src="eqs/2581867003665528156-130.png" alt="mathtt{R}" style="vertical-align: -1px" /> must be able to recover <img class="eq" src="eqs/7668878543051196482-130.png" alt="Xoplus  Y" style="vertical-align: -2px" />.</p>
+</li>
+<li><p><img class="eq" src="eqs/11136033494-130.png" alt="W" style="vertical-align: -1px" /> must be independent of <img class="eq" src="eqs/11264033881-130.png" alt="X" style="vertical-align: -0px" />, and <img class="eq" src="eqs/11136033494-130.png" alt="W" style="vertical-align: -1px" /> must be independent of <img class="eq" src="eqs/11392034264-130.png" alt="Y" style="vertical-align: -0px" />.</p>
+</li>
+</ul>
+<p>Firstly, is this even doable? We showed[3] that this is indeed the case. In fact, our scheme works even if the distribution of <img class="eq" src="eqs/11520034651-130.png" alt="Z" style="vertical-align: -0px" /> is arbitrary and unknown to the two users. We gave a lattice coding scheme, and found the achievable rates. We also relaxed the security constraint to only requiring that <img class="eq" src="eqs/4022493335624486960-130.png" alt="I(X;W)to 0" style="vertical-align: -5px" /> and <img class="eq" src="eqs/1811994015739426333-130.png" alt="I(Y;W)to 0" style="vertical-align: -5px" /> for large blocklengths and gave a scheme that achieves a higher rate. Later, we also made some observations on the case where the channel gains are not unity, and possibly unknown to the user nodes.[4] </p>
+<h3>References</h3>
+<ol>
+<li><p>M. Wilson, K. Narayanan, H. Pfister, and A. Sprintson, &lsquo;&lsquo;Joint physical
+layer coding and network coding for bidirectional relaying,&rsquo;&rsquo; IEEE Trans.
+Inf. Theory, vol. 56, no. 11, pp. 5641&ndash;5654, Nov. 2010.</p>
+</li>
+<li><p>B. Nazer and M. Gastpar, &lsquo;&lsquo;Compute-and-forward: harnessing interfer-
+ence through structured codes,&rsquo;&rsquo; IEEE Trans. Inf. Theory, vol. 57, no.
+10, pp. 6463&ndash;6486, Oct. 2011.</p>
+</li>
+<li><p>S. Vatedka, N. Kashyap, A. Thangaraj, &ldquo;Secure Compute-and-Forward in a Bidirectional Relay&rdquo;,  IEEE Trans. Inf. Theory, vol. 51, no. 5, pp 2531&ndash;2556, May 2015.</p>
+</li>
+<li><p>S. Vatedka and N. Kashyap, &ldquo;Nested Lattice Codes for Secure Bidirectional Relaying with Asymmetric Channel Gains&rdquo;, (Invited), IEEE Information Theory Workshop (ITW), Jerusalem, Israel, 2015. </p>
+</li>
+</ol>
+<h2>Secret Key Generation from Gaussian Sources</h2>
+<p>Consider a set-up where <img class="eq" src="eqs/13952041964-130.png" alt="m" style="vertical-align: -1px" /> terminals have correlated random sources. They have access to a public noise-free communication channel, and the aim is to agree upon a secret message (key) by talking to each other on the public channel. The key so obtained must be kept secret from a passive eavesdropper who can listen to all the exchange that takes place across the public channel. At the end of the communication, all terminals must be able to recover the key (which is a function of the sources) reliably, and the key must be independent/nearly independent of the public communication (which is a random variable that depends on the sources and possibly some added randomness).
+This set-up is called the source model for secret key generation.</p>
+<p>Csiszar and Narayan[1] studied the multiterminal source model where all terminals have access to discrete sources (drawn from a finite alphabet).
+They gave a protocol for secret key generation and characterized the secret key capacity, the maximum number of key bits that can be generated per source sample. This was extended to the case where the sources are Gaussian by Nitinawarat and Narayan[2]. 
+We studied a specific case of the Gaussian multiterminal source model (the dependence structure of the sources can be described by a Markov tree), and gave a lattice coding scheme whose overall complexity (of computing the secret key) is polynomial in the number of samples[3].</p>
+<h3>References</h3>
+<ol>
+<li><p>I. Csiszar and P. Narayan, &ldquo;Secrecy capacities for multiple terminals,&rdquo;
+IEEE Trans. Inf. Theory, vol. 50, no. 12, pp. 3047–3061, Dec. 2004</p>
+</li>
+<li><p>S. Nitinawarat and P. Narayan, &ldquo;Secret Key Generation for Correlated
+Gaussian Sources,&rdquo; IEEE Trans. Inf. Theory, vol. 58, no. 6, pp. 3373–
+3391, Jun. 2012.</p>
+</li>
+<li><p>S. Vatedka, N. Kashyap, &ldquo;A Lattice Coding Scheme for Secret Key Generation from Gaussian Markov Tree Sources&rdquo;, submitted, ISIT 2016.</p>
+</li>
+</ol>
+<h2>Computationally Efficient Lattice Coding Schemes</h2>
+<p>Lattice codes have been shown to be useful in several problems such as reliable communication in AWGN channels, vector quantization,  multiterminal source and channel coding, physical layer security, and so on.
+A useful class of lattices is the so-called Construction-A lattices. These are derived from linear codes over prime fields, and are a good choice for the previously mentioned applications.
+A key deterrent to using lattice codes in practice is that the computational complexity of finding the closest lattice point scales exponentially in the dimension of the lattice. </p>
+<p>We studied a class of Construction-A lattices derived from low-density parity check (LDPC) codes, called low-density Construction-A (LDA) lattices.
+These were proposed by di Pietro et al.[1], who showed that LDA lattices achieve the capacity of the AWGN channel with closest lattice point decoding. We carried on further studies and showed that LDA lattices have several structural properties that are desirable in practice.</p>
+<p>We also proposed a concatenated lattice coding scheme whose encoding/decoding complexity is polynomial in the blocklength[3]. This gives a general technique to reduce the decoding complexity (while maintaining the same rate-error probability performance) of lattice coding schemes. Thus, we can get poly-time coding schemes that achieve the capacity of the AWGN channel, the Gaussian wiretap channel, the rate-distortion limit for memoryless Gaussian sources, and near-optimal poly-time schemes for physical layer network coding, secure compute-and-forward, and several other applications. </p>
+<h3>References</h3>
+<ol>
+<li><p>N. di Pietro, J.J. Boutros, G. Zémor, and L. Brunel, “Integer low-density lattices based on Construction
+A,” Proc. 2012 Information Theory Workshop, Lausanne, Switzerland, 2012, pp. 422–426.</p>
+</li>
+<li><p>S. Vatedka and N. Kashyap, &ldquo;Some Goodness Properties of LDA Lattices&rdquo;, submitted, Problems of Information Transmission, December 2015.</p>
+</li>
+<li><p>S. Vatedka and N. Kashyap, &ldquo;A Capacity-Achieving Coding Scheme for the AWGN Channel with Polynomial Encoding and Decoding Complexity&rdquo;, accepted, 2016 National Conference on Communications (NCC), Guwahati, India. </p>
+</li>
+</ol>
+<h2>Pattern Maximum Likelihood Estimation of DTMCs</h2>
+<p>This is motivated by the problem of inferring the structure of a graph from a random walk starting from a random vertex. More generally, suppose that we observe <img class="eq" src="eqs/14080042351-130.png" alt="n" style="vertical-align: -1px" /> samples of a discrete-time Markov chain (DTMC). We do not know the state space/alphabet of the DTMC, but only know that the number of states/alphabet size is <img class="eq" src="eqs/13696041194-130.png" alt="k" style="vertical-align: -1px" />. In such a scenario, we want to estimate the transition kernel of the DTMC up to a relabeling of the alphabet. In such a case, the only useful information in the observed sequence is the <i>pattern</i> of the observed sequence. The pattern of an <img class="eq" src="eqs/14080042351-130.png" alt="n" style="vertical-align: -1px" />-length string is the <img class="eq" src="eqs/14080042351-130.png" alt="n" style="vertical-align: -1px" />-length string of numbers obtained by replacing each element by its order of appearance. For example, the pattern of <i>shashank</i> is <img class="eq" src="eqs/299848133140517887-130.png" alt="12312345" style="vertical-align: -1px" />. The kernel that maximizes the probability of occurrence of the observed pattern is called the pattern maximum likelihood (PML) distribution.</p>
+<p>The motivation for studying the PML distribution of memoryless sources came from the problem of universal source compression.[1,2]  There has also been work on designing efficient algorithms to compute the PML estimate.[3] We extended some of the results to Markov sources, and studied some variational techniques for efficiently computing the PML estimate for DTMCs.[4] </p>
+<h3>References</h3>
+<ol>
+<li><p>A. Orlitsky, N. Santhanam, and J. Zhang, “Universal compression of
+memoryless sources over unknown alphabets,” IEEE Trans. Inf. Theory,
+vol. 50, no. 7, pp. 1469–1481, Jul. 2004.</p>
+</li>
+<li><p>A. Orlitsky, N. Santhanam, K. Viswanathan, and J. Zhang, “On modeling
+profiles instead of values,” in Proc. 20th Conf. Uncertainty in Artificial
+Intelligence, Banff, Canada, 2004, pp. 426–435.</p>
+</li>
+<li><p>P.O. Vontobel, “The Bethe and Sinkhorn approximations of the pattern maxi-
+mum likelihood estimate and their connections to the Valiant-Valiant
+estimate,” in Proc. 2014 Inf. Theory and Applications Workshop, San
+Diego, CA, Feb. 2014, pp. 1–10.</p>
+</li>
+<li><p>S. Vatedka and P.O. Vontobel, &ldquo;Pattern Maximum Likelihood Estimation of Finite-State Discrete-Time Markov Chains&rdquo;, submitted, ISIT 2016. </p>
+</li>
+</ol>
+<div id="footer">
+<div id="footer-text">
+Page generated 2017-01-26 14:00:13 HKT, by <a href="http://jemdoc.jaboc.net/">jemdoc</a>.
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>
