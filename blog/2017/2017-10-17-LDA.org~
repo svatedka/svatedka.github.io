@@ -1,0 +1,115 @@
+#+TITLE: Latent Dirichlet Allocation
+
+#+BEGIN_COMMENT
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="readable-bootstrap.css"/>
+#+END_COMMENT
+
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="./jgkamat.css"/>
+
+-----
+
+
+These are some hastily assembled notes on latent Dirichlet allocation (LDA) based on a reading of [[http://www.jmlr.org/papers/v3/blei03a.html][this]] paper by Blei, Ng and Jordan.
+
+$\\$
+* Modeling collections of documents
+
+Consider the following scenario: we have a collection of text documents that we want to process. We could be interested in classifying the documents, compressing them,
+or extracting information from them. Compression or classification algorithms come with statistical guarantees assuming an underlying probabilistic model that generates
+documents. Latent Dirichlet allocation is a probabilistic model for modeling collections of documents.
+
+A fundamental assumption in LDA, and many other models is that the so-called "bag-of-words" assumption. This says that the order of appearance of words in a 
+document is not important. In other words, the sentences "this is a sample sentence" and "is sample a this sentence" are equally likely.
+This may not be reasonable for certain applications, but for classification or information extraction, this may be good enough.
+More sophisticated models exist where the "bag-of-words" assumption is not used, but we will continue with this for now.
+
+Before proceeding further, let us define some terms:
+  - /Words/: This are basic elements. The words are chosen from a vocabulary of $V$ words $\{1,2,\ldots,V  \}$. We model words as standard basis vectors in $\mathbb{R}^V$.
+  - /Documents/: A sequence of words. Think of these as standard text documents. Mathematically, these are sequences of standard basis vectors in $\mathbb{R}^V$.
+  - /Corpus/: A sequence of documents. A corpus is a collection of documents that are weakly related. 
+
+One example of a corpus is the collection of your emails. These are all related, since these are emails addressed to/written by you. Each document is a single email, which is in turn
+a collection of words. We will revisit this email example often in the coming discussion, so keep this in mind.
+
+
+
+** Modeling a corpus
+
+Let's look at a sequence of models in increasing generality.
+
+The simplest model we could come up with is an iid model. Each document is generated independently of all others, and in each
+document, the words are independently and identically generated according to a distribution $p$. This is the /unigram model/.
+Not a particularly good one.
+
+Recall that that the documents are "related." What does this mean? The documents share some common features. One way to model 
+this relationship is using /topics/. Coming back to our email examples, we see that some emails are personal, some are work related,
+and some are just promotions. Today, gmail does a basic categorization of your emails into /primary/, /social/, /promotions/, /updates/, and /forums/.
+And you can add your own labels as well. Gmail does some basic classification, although I don't know what algorithms they use.
+
+Anyway, one way to generalize the unigram model is the following: for a document, choose a topic $\theta$ at random. Each topic induces a certain distribution on words, say, $p(\cdot|\theta)$.
+Generate each word $w$ iid according to this distribution $p(w|\theta)$. This is called the /mixture of unigrams model/.
+
+Taking this idea further, we observe that each word corresponds to a particular topic. Several words correspond to a topic. For example, "dog," "cow," "bear," "mouse" are all talking about animals,
+while "doctor," "hospital," "test" correspond to medicine. Note that this is not a mutually exclusive categorization. The word "test" could correspond to a medical test (medicine), 
+or an exam in school (academics).
+
+The probabilistic latent sematic indexing (pLSI) model models the above. First, generate a document topic: this could be primary, social, promotions, etc.
+Denote this by $d$. Having done this, generate $N$ word-topics $z_1,z_2,\ldots, z_N$ out of a collection of $k<N$ topics. These are sampled iid from the 
+distribution $p(z|d)$. Now that we have a collection of topics, generate the words $w_1,\ldots,w_N$ from the vocabulary $\{ 1,2,\ldots, V \}$ according to 
+$p(w|z)$. Note that $V$ is much larger than $N$.
+
+What does this mean? Say, the document topic is work. This implies that you are more likely to use work-related words. Your language will be more formal,
+and perhaps you use certain jargon when talking to a colleague. This is reflected in the distribution $p(z|d)$. So work-related word-topics are more likely,
+and maybe word-topics such as "holiday," "animals," "fun" are less likely.
+
+A limitation of the pLSI model is that document topics are generated iid, and for each document topic $d$, we have a different $p(z|d)$. 
+Generally, a set of training documents is used to estimate $p(z|d)$. If we observe a new document outside the training set maybe corresponding to some new $d'$, how do we assign $p(z|d')$?
+Moreover, this model does not account for the fact that the documents are not independent, but correlated in some way.
+
+This is captured by the LDA model. We discuss this in the next section.
+
+
+* Latent Dirichlet Allocation
+
+We are given the following: 
+  + $M$: the number of documents in the corpus.
+  + $N$: the number of words in each document.
+  + $k$: the number of topics.
+  + $\mathcal{V}$: the vocabulary, which has size $V$.
+
+** Generating a corpus
+
+The LDA process is further parameterized by two objects: $\alpha$, a $k$-length vector with positive entries, and $\beta$: an $k\times V$ row-stochastic matrix.
+This is done in the following way:
+ - For each document, generate a topic at random :: For the $m$ th document, generate $\theta_m$, a vector from the $k-1$ simplex according to a [[https://en.wikipedia.org/wiki/Dirichlet_distribution][Dirichlet distribution]].
+      $$p(\theta|\alpha) = \frac{\Gamma(\sum_{i=1}^k\alpha_i)}{\prod_{i=1}^k\Gamma(\alpha_i)}\prod_{i=1}^k \theta_i^{\alpha_i-1},$$
+   where $\Gamma(\cdot)$ is the [[https://en.wikipedia.org/wiki/Gamma_function][gamma function]].
+ - Generate $N$ word-topics according to $\theta$ :: 
+   $$p(z_i|\theta) = \theta_{z_{i}},$$
+   where $z_{i}$ is in $\{1,2,\ldots,k\}$.
+ - Generate each word according to $\beta_{z_i,\cdot}$ ::
+    $$ p(w_i|z_i) = \beta_{z_i,w_i}, $$
+   where we have abused notation and assumed that $w_i\in\{ 1,2,\ldots,V \}$.
+
+** Classifying documents and words
+
+Suppose that we know $\alpha$ and $\beta$. Given a new document $D$ in the corpus, how can we classify the words into different topics? Given $w_1,\ldots,w_N$,
+find the most likely $\theta$ and $z_1,\ldots,z_N$ that generated this document. We could try computing a MAP estimate:
+$$(\hat{\theta},\hat{\mathbf{z}}) = \arg\max_{\theta,\mathbf{z}}p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta)=\arg\max_{\theta,\mathbf{z}}\frac{p(\theta,\mathbf{z},\mathbf{w}|\alpha,\beta)}{p(\mathbf{w}|\alpha,\beta)}.$$
+However, this is an intractable problem since the denominator is hard to compute. This is due to the coupling between $\theta$ and $z$.
+
+The authors propose a variational approach where you approximate the aposteriori probability $p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta)$ by a new distribution 
+$$q(\theta,\mathbf{z}|\gamma,\phi)= \left(\frac{\Gamma(\sum_{i=1}^k\gamma_i)}{\prod_{i=1}^k\Gamma(\gamma_i)}\prod_{i=1}^k \theta_i^{\gamma_i-1}\right) \prod_{i=1}^N\phi_{i,z_{i}} $$
+where $\gamma\in\mathbb{R}_+^k$ and $\phi$, an $N\times k$ row-stochastic matrix, are variational parameters. Instead of maximizing the aposteriori distribution (which is computationally hard),
+we first approximate $p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta)$ by $q(\theta,\mathbf{z}|\gamma,\phi)$ and then maximize $q$ instead. We do this by first choosing 
+$\phi$ and $\gamma$ so as to minimize the KL divergence $D(q(\theta,\mathbf{z}|\gamma,\phi)\Vert p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta))$, and then compute $(\theta,\mathbf{z})$
+that minimizes $q(\theta,\mathbf{z}|\gamma,\phi)$. As it turns out, $q(\theta,\mathbf{z}|\gamma,\phi)$ is always a lower bound for $p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta)$.
+
+
+
+** Estimating parameters
+
+
+
+
+

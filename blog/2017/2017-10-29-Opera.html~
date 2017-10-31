@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-10-31 Tue 20:05 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>An evening  of Chinese opera</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Shashank" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">An evening  of Chinese opera</h1>
+<hr  />
+
+<p>
+A few days ago, I had the chance to watch a <a href="https://en.wikipedia.org/wiki/Chinese_opera">Chinese opera</a> performance.
+</p>
+
+<p>
+Chinese opera is quite interesting, and there are many similarities with <a href="https://en.wikipedia.org/wiki/Yakshagana">Yakshagana</a>, a traditional theatre form of Karnataka.
+The common features include the emphasis on music and dance. While music and dance are the main focus of Yakshagana,
+Chinese opera has (relatively) more acrobatics and a different style.
+</p>
+
+<p>
+Not wanting to feel like a complete fool during the show, I decided to do some background reading on the art form and its features.
+I read that the most important feature of Chinese opera is the focus on beauty. The costume, performance, every motion must be beautiful.
+Even if the character is supposed to be grieving, it must be conveyed in a beautiful manner.
+</p>
+
+<p>
+The characters/roles in Peking opera can be broadly classified into four:
+</p>
+<ul class="org-ul">
+<li><i>Sheng</i>, or the main male role: A sheng is supposed to be scholarly, wealthy or important.</li>
+<li><i>Dan</i>, or the main female role: likewise, but a woman.</li>
+<li><i>Jing</i>, or the painted face: These are mythical characters, or otherwise characters with great power.</li>
+<li><i>Chou</i>, or the (painted face) comedian.</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="../files/images/2017-10-29-sheng.jpg" alt="2017-10-29-sheng.jpg" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Sheng</p>
+</div>
+
+<div class="figure">
+<p><img src="../files/images/2017-10-29-dan.jpg" alt="2017-10-29-dan.jpg" />
+</p>
+<p><span class="figure-number">Figure 2:</span> Dan</p>
+</div>
+
+<div class="figure">
+<p><img src="../files/images/2017-10-29-jing.jpg" alt="2017-10-29-jing.jpg" />
+</p>
+<p><span class="figure-number">Figure 3:</span> Jing</p>
+</div>
+
+<div class="figure">
+<p><img src="../files/images/2017-10-29-chou.jpg" alt="2017-10-29-chou.jpg" />
+</p>
+<p><span class="figure-number">Figure 4:</span> Chou</p>
+</div>
+
+<div class="figure">
+<p><img src="../files/images/2017-10-29-yakshagana.jpg" alt="2017-10-29-yakshagana.jpg" />
+</p>
+<p><span class="figure-number">Figure 5:</span> A Yakshagana troupe</p>
+</div>
+
+
+<p>
+Chinese opera does not use many props, instead, symbolic elements are used. A chair can represent a seat, a throne, or sometimes a mountain.
+A whip in hand indicates the presence of a horse, and an oar means that the character is in a boat.
+Walking along a big circle on stage signifies that the person has walked a great distance.
+</p>
+
+<p>
+Likewise, the costume tells a lot about the character. Floral patterns indicate an affluent person, and plain robes
+mean that the person is poor. Generals generally wear green robes, and yellow robes are usually reserved for the emperor.
+The patterns on the dress indicate which era and dynasty the person is from.
+The headdress gives information about whether the person is a scholar or a warrior or a minister.
+Well, you get the drift.
+</p>
+
+<p>
+Coming to the performance I went to: there were five main acts, each one by a different troupe. 
+Each act lasted between twenty minutes and half an hour.
+Four of these were Peking opera troupes and one was Cantonese.
+</p>
+
+<p>
+The first act was <i>Dang Ma</i> (Obstructing the horse). This was a scene taken from the folklore <i><a href="https://en.wikipedia.org/wiki/Generals_of_the_Yang_Family">Generals of the Yang family</a></i>.
+One of the members of the Yang family (who is the protagonist, or the <i>Dan</i>) happens to visit a restaurant in north China. The restaurant owner (<i>Chou</i>),
+who is originally from south China,
+wants to go back to his homeland but unfortunately does not have a passport.
+The owner hatches a plan to steal a passport from an unsuspecting customer from the south.
+Without realizing that the customer is from the famous Yang family, he proceeds with his plan, and a duel begins.
+This play developed into a visually stunning acrobatic display. The person playing the restaurant owner was splendid, 
+performing back flips and jumps and cartwheels like it was nothing. All that with grace. Some highlights were acrobatics and
+difficult balancing acts performed on a chair.
+</p>
+
+<p>
+The second one was called <i>Hong Niang</i> (The Matchmaker). This was about two lovers, who face opposition from the girl's parents.
+Another girl tries to get them together. Mostly a monologue by the second girl.
+</p>
+
+<p>
+The third one was <i>Shi Zi Jing Feng</i> (I think this translates to <i>Height of madness</i>). 
+The <i>Dan</i> was played by a famous artist, <i>Mu Yuan Di</i>. It was a stunning performance.
+The <i>dan</i> is a mother who has lost her child to a group of bandits. As she grieves over her lost child,
+she loses her  mind, and progression from sadness to grief to insanity was depicted beautifully. Both the acting and the dance were simply amazing. 
+The highlight  was a point in the play when the stage fell silent for a few moments, and everyone was fixated on the expressions on Di's face. 
+For about a minute, I think everyone forgot to breathe. 
+She managed to captivate the entire hall. A truly masterclass performance. I was later stunned on learning that Mu Yuan Di is in fact a man!
+</p>
+
+<p>
+The fourth was Cantonese style, <i>Huan Jue Li Hen Tian</i>, which also had a famous artist <i>Liang Yao Ming</i> (the <i>Dan</i>).
+This was taken from <i>Dream of the red chamber</i>, one of the four great classical novels in Chinese.
+This was another love story, where the woman symbolizes grass, and the man was stone.
+They are deeply in love with each other but they are fated to stay apart. 
+Ends with grass telling stone to forget her.
+</p>
+
+<p>
+The finale was <a href="https://en.wikipedia.org/wiki/Farewell_My_Concubine_(play)">Farewell my Concubine</a>, with the concubine played by <i>Hu Wenge</i>. He is a famous artist who always plays the <i>Dan</i>,
+and is from the Mei school of Peking opera (founded by <a href="https://en.wikipedia.org/wiki/Mei_Lanfang">Mei Lanfang</a>, considered one of the four great <i>dan</i>). 
+The emperor (the <i>Jing</i>) was played by another famous artist, <i>Wang Lijun</i>.
+This was another masterclass performance by both artists.
+The story goes along these lines. The emperor of Chu, <i>Xiang Yu</i> is embroiled in a war with <i>Liu Bang</i> of Yan.
+ <i>Xiang Yu</i> is about to lose the war, and pleads with his horse and concubine to abandon him and run away to safety.
+The horse refuses to leave him. His concubine, <i>Yu</i> says that she will die with him. When he refuses,
+she distracts him with a final dance, and the play ends with her killing herself. A touching end to the play.
+The play inspired a <a href="https://en.wikipedia.org/wiki/Farewell_My_Concubine_(novel)">novel</a> and a <a href="https://en.wikipedia.org/wiki/Farewell_My_Concubine_(film)">film</a> with the same name.
+</p>
+
+<p>
+In all, it was a wonderful evening. Classical music and dance, traditional theatre forms such as opera, Yakshagana,
+all offer pure unadulterated forms of art. I fervently hope that there is more encouragement given to these,
+and more people recognise and appreciate them for their true worth.
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Shashank</p>
+<p class="date">Created: 2017-10-31 Tue 20:05</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+#+TITLE: Shashank's blog
+#+AUTHOR: Shashank Vatedka
+
+#+OPTIONS: num:nil
+#+SETUPFILE: ./org-html-themes-master/setup/theme-readtheorg-local.setup
+
+
+#+BEGIN_COMMENT
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="readable-bootstrap.css"/>
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="solarized-light.css"/>
+#+SETUPFILE: ../org-html-themes-master/setup/theme-bigblow-local.setup
+#+END_COMMENT
+
+-----
+
+* 2017
+
+** October 2017
+  - [[file:./2017/2017-10-29-Opera.html][An evening of Chinese opera]]
+  - [[./2017/2017-10-17-LDA.html][Latent Dirichlet Allocation]]

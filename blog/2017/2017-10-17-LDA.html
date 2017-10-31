@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-10-24 Tue 19:57 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Latent Dirichlet Allocation</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Shashank" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Latent Dirichlet Allocation</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">Modeling collections of documents</a>
+<ul>
+<li><a href="#orgheadline2">Modeling a corpus</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline3">Latent Dirichlet Allocation</a>
+<ul>
+<li><a href="#orgheadline4">Generating a corpus</a></li>
+<li><a href="#orgheadline5">Classifying documents and words</a></li>
+<li><a href="#orgheadline6">Estimating parameters</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<hr  />
+
+
+<p>
+These are some hastily assembled notes on latent Dirichlet allocation (LDA) based on a reading of <a href="http://www.jmlr.org/papers/v3/blei03a.html">this</a> paper by Blei, Ng and Jordan.
+</p>
+
+<p>
+\(\\\)
+</p>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Modeling collections of documents</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<p>
+Consider the following scenario: we have a collection of text documents that we want to process. We could be interested in classifying the documents, compressing them,
+or extracting information from them. Compression or classification algorithms come with statistical guarantees assuming an underlying probabilistic model that generates
+documents. Latent Dirichlet allocation is a probabilistic model for modeling collections of documents.
+</p>
+
+<p>
+A fundamental assumption in LDA, and many other models is that the so-called "bag-of-words" assumption. This says that the order of appearance of words in a 
+document is not important. In other words, the sentences "this is a sample sentence" and "is sample a this sentence" are equally likely.
+This may not be reasonable for certain applications, but for classification or information extraction, this may be good enough.
+More sophisticated models exist where the "bag-of-words" assumption is not used, but we will continue with this for now.
+</p>
+
+<p>
+Before proceeding further, let us define some terms:
+</p>
+<ul class="org-ul">
+<li><i>Words</i>: This are basic elements. The words are chosen from a vocabulary of \(V\) words \(\{1,2,\ldots,V  \}\). We model words as standard basis vectors in \(\mathbb{R}^V\).</li>
+<li><i>Documents</i>: A sequence of words. Think of these as standard text documents. Mathematically, these are sequences of standard basis vectors in \(\mathbb{R}^V\).</li>
+<li><i>Corpus</i>: A sequence of documents. A corpus is a collection of documents that are weakly related.</li>
+</ul>
+
+<p>
+One example of a corpus is the collection of your emails. These are all related, since these are emails addressed to/written by you. Each document is a single email, which is in turn
+a collection of words. We will revisit this email example often in the coming discussion, so keep this in mind.
+</p>
+</div>
+
+
+
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Modeling a corpus</h3>
+<div class="outline-text-3" id="text-orgheadline2">
+<p>
+Let's look at a sequence of models in increasing generality.
+</p>
+
+<p>
+The simplest model we could come up with is an iid model. Each document is generated independently of all others, and in each
+document, the words are independently and identically generated according to a distribution \(p\). This is the <i>unigram model</i>.
+Not a particularly good one.
+</p>
+
+<p>
+Recall that that the documents are "related." What does this mean? The documents share some common features. One way to model 
+this relationship is using <i>topics</i>. Coming back to our email examples, we see that some emails are personal, some are work related,
+and some are just promotions. Today, gmail does a basic categorization of your emails into <i>primary</i>, <i>social</i>, <i>promotions</i>, <i>updates</i>, and <i>forums</i>.
+And you can add your own labels as well. Gmail does some basic classification, although I don't know what algorithms they use.
+</p>
+
+<p>
+Anyway, one way to generalize the unigram model is the following: for a document, choose a topic \(\theta\) at random. Each topic induces a certain distribution on words, say, \(p(\cdot|\theta)\).
+Generate each word \(w\) iid according to this distribution \(p(w|\theta)\). This is called the <i>mixture of unigrams model</i>.
+</p>
+
+<p>
+Taking this idea further, we observe that each word corresponds to a particular topic. Several words correspond to a topic. For example, "dog," "cow," "bear," "mouse" are all talking about animals,
+while "doctor," "hospital," "test" correspond to medicine. Note that this is not a mutually exclusive categorization. The word "test" could correspond to a medical test (medicine), 
+or an exam in school (academics).
+</p>
+
+<p>
+The probabilistic latent sematic indexing (pLSI) model models the above. First, generate a document topic: this could be primary, social, promotions, etc.
+Denote this by \(d\). Having done this, generate \(N\) word-topics \(z_1,z_2,\ldots, z_N\) out of a collection of \(k\le N\) topics. These are sampled iid from the 
+distribution \(p(z|d)\). Now that we have a collection of topics, generate the words \(w_1,\ldots,w_N\) from the vocabulary \(\{ 1,2,\ldots, V \}\) according to 
+\(p(w|z)\). Note that \(V\) is much larger than \(N\).
+</p>
+
+<p>
+What does this mean? Say, the document topic is work. This implies that you are more likely to use work-related words. Your language will be more formal,
+and perhaps you use certain jargon when talking to a colleague. This is reflected in the distribution \(p(z|d)\). So work-related word-topics are more likely,
+and maybe word-topics such as "holiday," "animals," "fun" are less likely.
+</p>
+
+<p>
+A limitation of the pLSI model is that document topics are generated iid, and for each document topic \(d\), we have a different \(p(z|d)\). 
+Generally, a set of training documents is used to estimate \(p(z|d)\). If we observe a new document outside the training set maybe corresponding to some new \(d'\), how do we assign \(p(z|d')\)?
+Moreover, this model does not account for the fact that the documents are not independent, but correlated in some way.
+</p>
+
+<p>
+This is captured by the LDA model. We discuss this in the next section.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Latent Dirichlet Allocation</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<p>
+We are given the following: 
+</p>
+<ul class="org-ul">
+<li>\(M\): the number of documents in the corpus.</li>
+<li>\(N\): the number of words in each document.</li>
+<li>\(k\): the number of topics.</li>
+<li>\(\mathcal{V}\): the vocabulary, which has size \(V\).</li>
+</ul>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Generating a corpus</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<p>
+The LDA process is further parameterized by two objects: \(\alpha\), a \(k\) length vector with positive entries, and \(\beta\): an \(k\times V\) row-stochastic matrix.
+This is done in the following way:
+</p>
+<ul class="org-ul">
+<li><p>
+<b>For each document, generate a topic at random:</b> For the \(m\) th document, generate \(\theta_m\), a vector from the \(k-1\) simplex according to a <a href="https://en.wikipedia.org/wiki/Dirichlet_distribution">Dirichlet distribution</a>.
+</p>
+\begin{equation}
+  p(\theta|\alpha) = \frac{\Gamma(\sum_{i=1}^k\alpha_i)}{\prod_{i=1}^k\Gamma(\alpha_i)}\prod_{i=1}^k \theta_i^{\alpha_i-1},
+\end{equation}
+<p>
+where \(\Gamma(\cdot)\) is the <a href="https://en.wikipedia.org/wiki/Gamma_function">gamma function</a>.
+</p></li>
+<li><p>
+<b>Generate \(N\) word-topics according to \(\theta\):</b> 
+</p>
+\begin{equation}
+   p(z_i|\theta) = \theta_{z_{i}},
+\end{equation}
+<p>
+where \(z_{i}\) is in \(\{1,2,\ldots,k\}\).
+</p></li>
+<li><p>
+<b>Generate each word according to \(\beta_{z_i,\cdot}\):</b>
+</p>
+\begin{equation} 
+  p(w_i|z_i) = \beta_{z_i,w_i}, 
+\end{equation}
+<p>
+where we have abused notation and assumed that \(w_i\in\{ 1,2,\ldots,V \}\).
+</p></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Classifying documents and words</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<p>
+Suppose that we know \(\alpha\) and \(\beta\). Given a new document \(D\) in the corpus, how can we classify the words into different topics? Given \(w_1,\ldots,w_N\),
+find the most likely \(\theta\) and \(z_1,\ldots,z_N\) that generated this document. We could try computing a MAP estimate:
+</p>
+\begin{equation}
+ (\hat{\theta},\hat{\mathbf{z}}) = \arg\max_{\theta,\mathbf{z}}p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta)=\arg\max_{\theta,\mathbf{z}}\frac{p(\theta,\mathbf{z},\mathbf{w}|\alpha,\beta)}{p(\mathbf{w}|\alpha,\beta)}.
+\end{equation}
+<p>
+However, this is an intractable problem since the denominator is hard to compute. This is due to the coupling between \(\theta\) and \(z\).
+</p>
+
+<p>
+The authors propose a variational approach where you approximate the aposteriori probability \(p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta)\) by a new distribution 
+</p>
+\begin{equation}
+q(\theta,\mathbf{z}|\gamma,\phi)= \left(\frac{\Gamma(\sum_{i=1}^k\gamma_i)}{\prod_{i=1}^k\Gamma(\gamma_i)}\prod_{i=1}^k \theta_i^{\gamma_i-1}\right) \prod_{i=1}^N\phi_{i,z_{i}} 
+\end{equation}
+<p>
+where \(\gamma\in\mathbb{R}_+^k\) and \(\phi\), an \(N\times k\) row-stochastic matrix, are variational parameters. Instead of maximizing the aposteriori distribution (which is computationally hard),
+we first approximate \(p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta)\) by \(q(\theta,\mathbf{z}|\gamma,\phi)\) and then maximize \(q\) instead. We do this by first choosing 
+\(\phi\) and \(\gamma\) so as to minimize the KL divergence \(D(q(\theta,\mathbf{z}|\gamma,\phi)\Vert p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta))\), and then compute \((\theta,\mathbf{z})\)
+that minimizes \(q(\theta,\mathbf{z}|\gamma,\phi)\). As it turns out, \(q(\theta,\mathbf{z}|\gamma,\phi)\) is always a lower bound for \(p(\theta,\mathbf{z}|\mathbf{w},\alpha,\beta)\).
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Estimating parameters</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<hr  />
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Shashank</p>
+<p class="date">Created: 2017-10-24 Tue 19:57</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
